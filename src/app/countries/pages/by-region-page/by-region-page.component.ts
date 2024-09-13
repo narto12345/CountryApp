@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CountriesService } from '../../services/countries.service';
 import { Country } from '../../interfaces/country';
 import { SearchType } from '../../enums/search-type-enum';
@@ -8,7 +8,7 @@ import { SearchType } from '../../enums/search-type-enum';
   templateUrl: './by-region-page.component.html',
   styles: ``
 })
-export class ByRegionPageComponent {
+export class ByRegionPageComponent implements OnInit {
   public placeholder: string = "Ingrese una región";
   public countries: Country[] = [];
   public flagLoading: boolean = false;
@@ -16,6 +16,11 @@ export class ByRegionPageComponent {
   public regionSelected?: string;
 
   constructor(private countriesService: CountriesService) { }
+
+  ngOnInit(): void {
+    this.countries = this.countriesService.cacheStore.region.countries;
+    this.regionSelected = this.countriesService.cacheStore.region.term;
+  }
 
   public searchByRegion(term: string): void {
     this.regionSelected = term;

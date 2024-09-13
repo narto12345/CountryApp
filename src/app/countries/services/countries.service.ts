@@ -27,7 +27,11 @@ export class CountriesService {
     }
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    if (typeof window !== 'undefined' && localStorage.getItem("countries")) {
+      this.cacheStore = JSON.parse(localStorage.getItem("countries")!);
+    }
+  }
 
   public searchCountries(value: string, searchType: SearchType): Observable<Country[]> {
     return this.http.get<Country[]>(`${this.apiUrl}/${searchType}/${value}`)
@@ -49,8 +53,15 @@ export class CountriesService {
               break;
             }
           }
+          this.saveLocalStorage();
         })
       );
+  }
+
+  private saveLocalStorage(): void {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("countries", JSON.stringify(this.cacheStore));
+    }
   }
 
 }

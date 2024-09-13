@@ -12,11 +12,11 @@
         <th>Nombre</th>
         <th>Capital</th>
         <th>Población</th>
-        <th>#</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let country of this.countries; let i = index">
+      <tr *ngFor="let country of this.visibleCountries; let i = index">
         <td>{{i+1}}</td>
         <td>{{country.flag}}</td>
         <td>
@@ -26,9 +26,44 @@
         <td>{{country.capital}}</td>
         <td>{{country.population | number}}</td>
         <td>
-          <a routerLink="/countries/by/{{this.country.ccn3}}">Ver más</a>
+          <a class="btn btn-primary" routerLink="/countries/by/{{this.country.ccn3}}">Ver más</a>
         </td>
       </tr>
     </tbody>
   </table>
+  <!-- Paginacion -->
+  <nav id="paginator" aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="this.currentPage === 1"><a (click)="cutTheArray(1)"
+          class="page-link">First
+          page</a></li>
+
+      <li class="page-item" [class.disabled]="this.currentPage === 1"><a (click)="movePage(-1)"
+          class="page-link"><<</a></li>
+
+      <li class="page-item" *ngIf="this.pagination.button1.status"
+        [class.bg-primary]="this.currentPage === this.pagination.button1.value"><a
+          (click)="cutTheArray(this.pagination.button1.value)" class="page-link">{{this.pagination.button1.value}}</a>
+      </li>
+      <li class="page-item" *ngIf="this.pagination.button2.status"
+        [class.bg-primary]="this.currentPage === this.pagination.button2.value"><a
+          (click)="cutTheArray(this.pagination.button2.value)" class="page-link">{{this.pagination.button2.value}}</a>
+      </li>
+      <li class="page-item" *ngIf="this.pagination.button3.status"
+        [class.bg-primary]="this.currentPage === this.pagination.button3.value"><a
+          (click)="cutTheArray(this.pagination.button3.value)" class="page-link">{{this.pagination.button3.value}}</a>
+      </li>
+
+      <li class="page-item" [class.disabled]="this.currentPage === this.pageNumber"><a (click)="movePage(1)"
+          class="page-link">>></a></li>
+
+      <li class="page-item" [class.disabled]="this.currentPage === this.pageNumber"><a
+          (click)="cutTheArray(this.pageNumber)" class="page-link">Last page</a></li>
+
+      <li id="counter">
+        <p>Total de países: {{this.countries.length}} | Total de páginas: {{this.pageNumber}} | Página actual:
+          {{this.currentPage}}</p>
+      </li>
+    </ul>
+  </nav>
 </ng-template>
