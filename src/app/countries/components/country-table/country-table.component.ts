@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Country } from '../../interfaces/country';
 import { Pagination } from './pagination';
+import { CountriesService } from '../../services/countries.service';
 
 @Component({
   selector: 'countries-country-table',
@@ -12,18 +13,22 @@ export class CountryTableComponent implements OnInit, OnChanges {
   @Input()
   public countries: Country[] = [];
 
+  @Input()
+  public pageSize!: number;
+
   public visibleCountries: Country[] = [];
-  public pageSize: number = 5;
+
   public pageNumber!: number;
   public currentPage: number = 1;
 
   public pagination!: Pagination;
 
-  constructor() {
+  constructor(private countriesService: CountriesService) {
 
   }
 
   ngOnInit(): void {
+    this.pageSize = this.countriesService.pageSize;
     this.setInitialCountries();
     this.cutTheArray(this.currentPage);
     this.pagination = new Pagination();
@@ -32,20 +37,12 @@ export class CountryTableComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     // Esto se ejecuta cuando la propiedad "countries" se le efectua un cambio
-    if (changes['countries']) {
+    if (changes['countries'] || changes['pageSize']) {
+      this.pageSize = this.countriesService.pageSize;
       this.setInitialCountries();
       this.currentPage = 1;
       this.cutTheArray(this.currentPage);
       this.pagination?.setInitialValues(this.pageNumber);
-    }
-  }
-
-  private setInitialCountries(): void {
-    const floatpagesDecimal: number = this.countries.length / this.pageSize;
-    this.pageNumber = Number(floatpagesDecimal.toFixed(0));
-
-    if (floatpagesDecimal > this.pageNumber) {
-      this.pageNumber++;
     }
   }
 
@@ -63,6 +60,15 @@ export class CountryTableComponent implements OnInit, OnChanges {
     if (move > this.pageNumber) move = this.pageNumber;
 
     this.cutTheArray(move);
+  }
+
+  private setInitialCountries(): void {
+    const floatpagesDecimal: number = this.countries.length / this.pageSize;
+    this.pageNumber = Number(floatpagesDecimal.toFixed(0));
+
+    if (floatpagesDecimal > this.pageNumber) {
+      this.pageNumber++;
+    }
   }
 
 }

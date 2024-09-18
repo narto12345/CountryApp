@@ -12,6 +12,8 @@ export class CountriesService {
 
   private apiUrl: string = "https://restcountries.com/v3.1";
 
+  public pageSize: number = 5;
+
   public cacheStore: SearchValues = {
     capital: {
       term: "",

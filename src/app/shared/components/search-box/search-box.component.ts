@@ -12,6 +12,9 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
   private tuboDeAgua: Subject<string> = new Subject<string>();
 
   @Input()
+  public isRegion: boolean = false;
+
+  @Input()
   public placeHolder: string = "";
 
   @Input()
@@ -20,7 +23,12 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
   @Output()
   public onValue = new EventEmitter<string>();
 
+  @Output()
+  public pageSizeOutPut = new EventEmitter<string>();
+
   @ViewChild('textInput') inputElement!: ElementRef<HTMLInputElement>;
+
+  public pageSixeComboBox: string[] = ["5", "10", "20", "40", "50", "100"];
 
   constructor(private countriesService: CountriesService) { }
 
@@ -42,6 +50,20 @@ export class SearchBoxComponent implements OnInit, OnDestroy {
 
   public onKeyPress(searchTerm: string) {
     this.tuboDeAgua.next(searchTerm);
+  }
+
+  public limitEvent(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement; // Casting
+    const selectedValue = selectElement.value;
+    this.countriesService.pageSize = Number(selectedValue);
+    this.pageSizeOutPut.emit(selectedValue);
+
+    console.log(this.countriesService.pageSize);
+
+  }
+
+  public get limitSelected(): string {
+    return this.countriesService.pageSize.toString();
   }
 
 }

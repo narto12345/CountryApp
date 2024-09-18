@@ -14,12 +14,14 @@ export class ByRegionPageComponent implements OnInit {
   public flagLoading: boolean = false;
   public regions: string[] = ["Africa", "Americas", "Asia", "Europe", "Oceania"];
   public regionSelected?: string;
+  public pageSize!: number;
 
   constructor(private countriesService: CountriesService) { }
 
   ngOnInit(): void {
     this.countries = this.countriesService.cacheStore.region.countries;
     this.regionSelected = this.countriesService.cacheStore.region.term;
+    this.pageSize = this.countriesService.pageSize;
   }
 
   public searchByRegion(term: string): void {
@@ -29,5 +31,9 @@ export class ByRegionPageComponent implements OnInit {
       this.flagLoading = false;
       this.countries = response;
     });
+  }
+
+  public changePageSize(pageSizeOutPut: string) {
+    this.pageSize = Number(pageSizeOutPut);
   }
 }

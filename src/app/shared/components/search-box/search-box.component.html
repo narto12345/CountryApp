@@ -1,3 +1,19 @@
-<input type="text" [placeholder]="this.placeHolder" class="form-control" #textInput
-  (keyup)="onKeyPress(textInput.value)" [value]="this.initialValue">
-<!-- (keyup.enter)="searchValue()" -->
+<div *ngIf="!this.isRegion" class="row">
+  <div class="col-10">
+    <input type="text" [placeholder]="this.placeHolder" class="form-control" #textInput
+      (keyup)="onKeyPress(textInput.value)" [value]="this.initialValue">
+  </div>
+  <div class="col-2">
+    <select id="combo-box" name="select" class="form-control" (change)="limitEvent($event)">
+      <option #limitTag *ngFor="let limit of this.pageSixeComboBox" [value]="limit"
+        [selected]="limit === this.limitSelected">{{limit}}</option>
+    </select>
+  </div>
+</div>
+
+<div *ngIf="this.isRegion">
+  <select id="combo-box" name="select" class="form-control" (change)="limitEvent($event)">
+    <option #limitTag *ngFor="let limit of this.pageSixeComboBox" [value]="limit"
+      [selected]="limit === this.limitSelected">{{limit}}</option>
+  </select>
+</div>

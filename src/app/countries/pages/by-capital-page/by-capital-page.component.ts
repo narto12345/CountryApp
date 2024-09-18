@@ -13,12 +13,14 @@ export class ByCapitalPageComponent implements OnInit {
   public countries: Country[] = [];
   public flagLoading: boolean = false;
   public initialValue: string = "";
+  public pageSize!: number;
 
   constructor(private countriesService: CountriesService) { }
 
   ngOnInit(): void {
     this.countries = this.countriesService.cacheStore.capital.countries;
     this.initialValue = this.countriesService.cacheStore.capital.term;
+    this.pageSize = this.countriesService.pageSize;
   }
 
   public searchByCapital(term: string): void {
@@ -27,5 +29,9 @@ export class ByCapitalPageComponent implements OnInit {
       this.flagLoading = false;
       this.countries = response;
     });
+  }
+
+  public changePageSize(pageSizeOutPut: string) {
+    this.pageSize = Number(pageSizeOutPut);
   }
 }
