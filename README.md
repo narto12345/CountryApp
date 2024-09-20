@@ -1,10 +1,10 @@
 # CountryApp
 
-Esta es una aplicación web eblaborada en Angular 17 que permite consultar países y visualizar sus detalles.
+Esta es una aplicación web elaborada en Angular 17 que permite consultar países y visualizar sus detalles.
 
-- Las consultas pueden ser realizadas mediantes el nombre del país, capital o región.
+- Las consultas pueden ser realizadas mediante el nombre del país, capital o región.
 - La aplicación usa el servicio de https://restcountries.com/v3.1 para obtener la información de los países.
-- La aplicación cuenta con funcionalidades para persistir las consultas realizadas a pesar de navegar entre los diversos apartados o incluso al recargar la página la información sigue premaneciendo.
+- La aplicación cuenta con funcionalidades para persistir las consultas realizadas a pesar de navegar entre los diversos apartados o incluso al recargar la página, la información sigue premaneciendo.
 
 ## Tecnologías utilizadas
 
