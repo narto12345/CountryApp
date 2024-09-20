@@ -20,7 +20,7 @@ A continuación, se exponen varias de sus funcionalidades:
 
 ![Navegación de páginas](/git-resources/images/navegacion.png)
 
-- Busqueda se países:
+- Busqueda de países:
 
 ![Busqueda de países](/git-resources/images/busqueda.png)
 
