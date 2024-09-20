@@ -1,27 +1,37 @@
 # CountryApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.8.
+Esta es una aplicación web eblaborada en Angular 17 que permite consultar países y visualizar sus detalles.
 
-## Development server
+- Las consultas pueden ser realizadas mediantes el nombre del país, capital o región.
+- La aplicación usa el servicio de https://restcountries.com/v3.1 para obtener la información de los países.
+- La aplicación cuenta con funcionalidades para persistir las consultas realizadas a pesar de navegar entre los diversos apartados o incluso al recargar la página la información sigue premaneciendo.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Tecnologías utilizadas
 
-## Code scaffolding
+ - Angular 17
+ - Bootstrap 5.3.3
+ - API https://restcountries.com/v3.1
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Funcionalidades principales
+  
+A continuación, se exponen varias de sus funcionalidades:
 
-## Build
+- Navegación de páginas:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+![Navegación de páginas](/git-resources/images/navegacion.png)
 
-## Running unit tests
+- Busqueda se países:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![Busqueda de países](/git-resources/images/busqueda.png)
 
-## Running end-to-end tests
+- Selector de cantidad de registros a mostrar:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Selector de cantidad](/git-resources/images/selector%20de%20cantidad.png)
 
-## Further help
+- Paginador:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+![Paginador](/git-resources/images/paginador.png)
+
+- Detalle de país:
+
+![Detalle de país](/git-resources/images/detalle.png)
